@@ -8,7 +8,7 @@ const router = express.Router();
 router
     .post('/create', async (req, res) => {
         try {
-            const post = await Post.makePost(req.body.username, req.body.post_content);
+            const post = await Post.makePost(req.body.user_id, req.body.post_content);
             res.send(post);
         } catch(error) {
             res.status(401).send({message: error.message});
@@ -17,7 +17,7 @@ router
 
     .post('/browse', async(req, res) => {
         try{
-            const post = await Post.getPost(req.body.target_username);
+            const post = await Post.getPost(req.body.target_user_id);
             res.send(post);
         } catch(error){
             res.status(401).send({message: error.message});

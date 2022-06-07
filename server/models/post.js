@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // Create schema for entity
 const postSchema = new mongoose.Schema({
-    username: {type: String, required: true},
+    user_id: {type: String, required: true},
     post_date: {type: Date, required: true},
     post_content:{type: String, required: true}
 })
@@ -14,9 +14,9 @@ const Post = mongoose.model("Post", postSchema);
 // Create CRUD functions on model
 
 // Create a post
-async function makePost(username, content) {
+async function makePost(user_id, content) {
     const newPost = await Post.create({
-        username: username,
+        user_id: user_id,
         post_content: content,
         post_date: Date.now()
     });
@@ -24,8 +24,8 @@ async function makePost(username, content) {
 }
 
 // Find posts by user
-async function getPost(username) {
-    const posts = await Post.find({"username" : username});
+async function getPost(user_id) {
+    const posts = await Post.find({"user_id" : user_id});
     return posts;
 }
 

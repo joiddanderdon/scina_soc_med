@@ -8,7 +8,7 @@ const router = express.Router();
 router
     .post('/create', async (req, res) => {
         try {
-            const comment = await Comment.makeComment(req.body.username, req.body.post_id, req.body.comment_content);
+            const comment = await Comment.makeComment(req.body.user_id, req.body.post_id, req.body.comment_content);
             res.send(comment);
         } catch(error) {
             res.status(401).send({message: error.message});
