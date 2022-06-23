@@ -1,7 +1,11 @@
-//import './App.css';
-//import './style1.css';
-import Books from './components/Books';
+import './App2.css';
+//import Books from './components/Books';
+import About from './components/About';
+import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Register from './components/Register';
 
+/*
 const books = [
   {
       id: 12345,
@@ -15,13 +19,17 @@ const books = [
       id: 34567,
       title: "Lunar Park"
   }
-]
+] */
 
 function App() {
   return (
-    <div className="App">
-      Hello Wally!
-      <Books books={books} />
+    <div className="App bg-black text-primary">
+      <Navbar />
+      <Login />
+      <hr /> <hr />
+      <Register />
+      <hr /> <hr />
+      <About />
     </div>
   );
 }

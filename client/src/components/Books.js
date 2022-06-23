@@ -1,14 +1,10 @@
-import '../style1.css';
-
-
-
 const Books = (props) => {
   return (
-    <div className="Books">
-      <h2>
+    <div className="books text-primary">
+      <h2 className="text-center">
         Some books!
       </h2>
-      <ul>
+      <ul className="bs-pink">
         { props.books.map((book) =>  <li key={book.id}>{book.title}</li>) }
       </ul>
     </div>
