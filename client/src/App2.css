@@ -15,8 +15,8 @@ body, html {
 }
 
 .navbar {
-  background-color: #343434;
-  color: #29F229;
+  background-color: #959595;
+  color: #291ec2;
   border: 4px solid #053D0E;
   font-family: 'comic sans ms';
   font-style: oblique;
@@ -30,12 +30,30 @@ body, html {
   text-transform: capitalize;
   position: relative;
   overflow: auto;
-  float: none;
-  border-radius: 13px;
-  text-shadow: 0px 2px 0px #318031;
-  box-shadow: 0px 0px 10px #318031;
+  border-radius: 48px;
+  text-shadow: 0px 2px 0px #291ec2;
+  box-shadow: 0px 0px 10px #291ec2;
+  overflow-x:hidden;
 }
 
+.navbarNav {
+  color:lightslategrey;
+}
 .no-bullets {
   list-style-type: none;
+}
+.loginBox {
+  font-variant: none;
+  font-size: 20px;
+  text-transform: none;
+  text-decoration: none;
+  font-style: normal;
+  
+}
+.loginBox a {
+  color: lawngreen;
+  text-align: center;
+}
+.loginBox a:hover {
+  color: red;
 }
