@@ -1,29 +1,25 @@
 const Login = () => (
-    <div>
-        <h2>Login</h2>
-        <hr />
-        <form>
-            
-                <div class="row">
-                    <div class="col">
-                        <label htmlFor="username">User Name:</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" />
-                    </div>
+    <div className="col loginBox">
+        <div className="row">   
+            <div className="col align-right">
+                <div className="row">
+                    <input type="text" name="usernameBox" id="usernameBox" placeholder="username" />
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label htmlFor="password">Password:</label>
-                    </div>
-                    <div class="col">
-                        <input type="password" />
-                    </div>
+                <div className="row">
+                    <input type="password" name="passwordBox" id="passwordBox" placeholder="password" />
+                    
                 </div>
-
-            
-        </form>
+            </div>
+            <div className="col align-left">
+                <div className="row">
+                    <button>Login</button>
+                </div>
+                <div className="row">
+                    <button>Register</button>
+                </div>
+            </div>
+        </div>    
     </div>
-)
+);
 
 export default Login;

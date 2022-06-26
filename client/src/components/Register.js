@@ -3,19 +3,19 @@ const Register = () => (
         <h2>Register</h2>
         <hr />
         <form>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <label htmlFor="username">Username: </label>
                 </div>
-                <div class="col">
+                <div className="col">
                     <input type="text" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <label htmlFor="password">Password: </label>
                 </div>
-                <div class="col">
+                <div className="col">
                     <input type="password" />
                 </div>
             </div>

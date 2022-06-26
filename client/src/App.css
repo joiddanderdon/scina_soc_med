@@ -1,44 +1,67 @@
-body {
-  padding: 20px;
-  background-color: black;
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
 }
 
+.navbar-asn {
+  background-image: linear-gradient(to right, #171718, #5572ab); 
+  color: #ffffff;
+  font-family: 'comic sans ms';
+  font-style: oblique;
+  font-weight: bold;
+  font-size: 32px;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  overflow-x:hidden;
+}
 
-.App {
+.navbar-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'comic sans ms';
+  font-weight: bolder;
+  font-size: 32px;
+  font-style: oblique;
+}
+
+.align-left {
   text-align: left;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.align-right {
+  text-align: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input:placeholder-shown {
+  font-style: italic;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.loginBox {
+  font-variant: none;
+  font-size: 22px;
+  text-transform: none;
+  text-decoration: none;
+  font-style: normal;
+  width: 75%;
+  height: 75%;
+  padding-top: 5px;
+  padding-right: 6px;
+  padding-left: 6px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loginBox button {
+  background-image: linear-gradient(#2b67e8, #0a43b7);
+  border: #0a43f5;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'comic sans ms';
+  text-align: center;
+  cursor: pointer;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  display: block;
+  width: 60%;
 }
