@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate();
+
     const [user, setUser] = useState({
         username: '',
         password: '',
         password2: ''
     });
-    const { username, password, password2} = user;
+
+    const { username, password, password2 } = user;
 
     const onChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -37,9 +39,10 @@ const Register = () => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            document.getElementById("inuse_error").innerHTML = error.message;
         })
     }
+
     return (
             <div>
                 <hr />
@@ -72,7 +75,7 @@ const Register = () => {
                                 id="password"
                                 required
                                 onChange={onChange}
-                                defaultValue={password}
+                                
                             />
                         </div>
                     </div>
@@ -87,7 +90,7 @@ const Register = () => {
                                 id="password2"
                                 required
                                 onChange={onChange}
-                                defaultValue={password2}
+                               
                             />
                         </div>
                     </div>
@@ -97,6 +100,11 @@ const Register = () => {
                             <button>Register</button>
                         </div>
                         <div className="col" id="confirm_error">
+
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col" id="inuse_error">
 
                         </div>
                     </div>

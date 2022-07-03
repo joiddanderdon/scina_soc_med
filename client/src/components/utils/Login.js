@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchData } from './Fetching';
 import React, { useState } from 'react';
 
@@ -23,7 +23,7 @@ const Login = (props) => {
         fetchData("/user/login", user, "POST")
         .then((data) => {
             if (!data.message) {
-                navigate("/profile", {state: {user:data.username, id:data._id}});
+                navigate("/profile",{state: {user: data.username, id:data._id}});
             }
         })
         .catch((error) => {
