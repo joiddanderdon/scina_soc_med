@@ -1,6 +1,3 @@
-//how the front end will access the back end
-
-//import libraries
 const express = require("express");
 //access functions in user model
 const User = require("../models/user");
@@ -29,7 +26,6 @@ router
 
     .put('/update', async (req, res) => {
         try {
-            //switch update function to use username
             const user = await User.updatePassword(req.body.id, req.body.password);
             res.send({...user, password: undefined});
         }catch(error) {
