@@ -18,13 +18,15 @@ const Register = () => {
     const onChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
         
+        /* This is wonky.. 
+        
         if (document.getElementById('password').value !==
             document.getElementById('password2').value) {
                 document.getElementById("confirm_error").innerHTML = 'Passwords do not match';
         } else {
             document.getElementById("confirm_error").innerHTML = '';
         }
-      
+        */
     }
     
     const onSubmit = (e) => {

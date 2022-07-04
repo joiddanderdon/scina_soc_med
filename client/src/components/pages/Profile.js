@@ -1,13 +1,30 @@
 import { fetchData } from "../utils/Fetching";
 import Form from "../utils/PostForm"
 import { React } from "react";
-import { useLocation } from "react-router-dom"; 
-import { useState } from 'react';
+import { useLocation, useNavigate } from "react-router-dom"; 
+import { useState, useEffect } from 'react';
 
  
 
+
 const Profile = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+
+
+/* //I think this will be the method of choice once we can establish a global state.
+
+    const [username, setUserName] = useState();
+    const [user, setUser] = useState({
+        username: '',
+        userid: '',
+    });
+    */
+    
+    if (location.state === null || location.state.length === 0) {
+        window.location.assign("./register");
+    }
+    
     const username = location.state.user;
     const userid = location.state.id;
     
@@ -46,12 +63,9 @@ const ListPosts = (props) => {
                 ))}
             </ul>
         </div>
-            
 
-
-           
-    
   );
+  
 }
 
 

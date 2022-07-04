@@ -15,6 +15,15 @@ router
         }
     })
 
+    .post('/get', async (req, res) => {
+        try {
+            const user = await User.getUserByName(req.body.username);
+            res.send({...user, password: undefined});
+        } catch(error) {
+            res.status(401).send({message: error.message});
+        }
+    }) 
+
     .post('/register', async(req, res) => {
         try{
             const user = await User.register(req.body.username, req.body.password);
@@ -39,6 +48,24 @@ router
             res.send({success: "Account deleted."});
         } catch(error) {
             res.status(401).send({ message: error.message});
+        }
+    })
+
+    .post('/follow', async(req, res) => {
+        try {
+            await User.follow(req.body.userid, req.body.username);
+            res.send({success: "Now following " + req.body.username});
+        } catch(error) {
+            res.status(401).send({ message: error.message });
+        }
+    })
+
+    .post('/lead', async(req, res) => {
+        try {
+            await User.addFollower(req.body.userid, req.body.username);
+            res.send({success: "Now leading " + req.body.username});
+        } catch(error) {
+            res.status(401).send({ message: error.messagee });
         }
     })
 

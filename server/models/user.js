@@ -36,11 +36,19 @@ async function register(username, password) {
 //READ a user (login)
 async function login(username, password) {
     const user = await getUser(username);
-    if (!user) throw Error('User not found!');
+    if (!user) throw Error('User not found!')
     
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw Error('Wrong password!');
 
+    return user._doc;
+}
+
+// To display others' profiles 'n whatnot.
+async function getUserByName(username){
+    const user = await getUser(username);
+    if (!user) throw Error(`User not found!`)
+    else console.log(user);
     return user._doc;
 }
 
@@ -57,13 +65,44 @@ async function deleteUser(id){
     await User.deleteOne({"_id": id});
 };
 
+// Follow
+async function follow(userid, username) {
+    const user = await User.findById(userid);
+    if (user.following === undefined) {
+        user.following = [];
+    }
+    user.following[user.following.length] = username;
+    await User.findByIdAndUpdate(userid, 
+        {following: user.following}
+        );
+    
+    return user._doc;
+}
+
+// Add follower
+async function addFollower(userid, username) {
+    const user = await User.findById(userid);
+    if (user.followers === undefined){
+        user.followers = [];
+    }
+    user.followers[user.followers.length] = username;
+    await User.findByIdAndUpdate(userid,
+        {
+            followers: user.followers
+        });
+    return user._doc;
+}
+
 
 //utility functions
 async function getUser(username){
     return await User.findOne({"username": username});
 }
 
+
+
+
 // export functions that will be used in routes
 module.exports = {
-    register, login, updatePassword, deleteUser
+    register, login, updatePassword, deleteUser, getUserByName, follow, addFollower
 };
