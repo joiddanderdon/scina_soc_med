@@ -53,21 +53,17 @@ router
 
     .post('/follow', async(req, res) => {
         try {
-            await User.follow(req.body.userid, req.body.username);
-            res.send({success: "Now following " + req.body.username});
+            if (await User.follow(req.body.userid, req.body.username)) {
+                res.send({success: "Now following " + req.body.username});
+            } else {
+                throw Error("User nonexistent or already followed");
+            }
         } catch(error) {
             res.status(401).send({ message: error.message });
         }
     })
 
-    .post('/lead', async(req, res) => {
-        try {
-            await User.addFollower(req.body.userid, req.body.username);
-            res.send({success: "Now leading " + req.body.username});
-        } catch(error) {
-            res.status(401).send({ message: error.messagee });
-        }
-    })
+    
 
 // export router for use in index.js
 module.exports = router;

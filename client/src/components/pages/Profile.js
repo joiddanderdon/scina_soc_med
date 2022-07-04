@@ -2,24 +2,16 @@ import { fetchData } from "../utils/Fetching";
 import Form from "../utils/PostForm"
 import { React } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; 
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
+import FriendPane from "../utils/FriendPane";
  
 
 
-const Profile = () => {
+const Profile = (f) => {
     const location = useLocation();
     const navigate = useNavigate();
 
 
-/* //I think this will be the method of choice once we can establish a global state.
-
-    const [username, setUserName] = useState();
-    const [user, setUser] = useState({
-        username: '',
-        userid: '',
-    });
-    */
     
     if (location.state === null || location.state.length === 0) {
         window.location.assign("./register");
@@ -29,15 +21,22 @@ const Profile = () => {
     const userid = location.state.id;
     
     return (
-        <div>
-            <hr />
-            <h2>
-                {username}'s Posts
+        <div className="row">
+            <span className="col-sm-auto">
+                <FriendPane username={username} />
+
+            </span>
+
+            <span className="col-lg-2">
                 <hr />
-                <ListPosts userid={userid} />
-                <hr />
-                <Form userid={userid} />
-            </h2>
+                <h2>
+                    {username}'s Profile
+                    <hr />
+                    <ListPosts userid={userid} />
+                    <hr />
+                    <Form userid={userid} />
+                </h2>
+            </span>
         </div>
     )
 }

@@ -48,15 +48,22 @@ async function login(username, password) {
 async function getUserByName(username){
     const user = await getUser(username);
     if (!user) throw Error(`User not found!`)
-    else console.log(user);
     return user._doc;
 }
 
 // Update Password
 async function updatePassword(id, password) {
-    const user = await User.updateOne({"_id": id}, {$set: { password: password}});
-    return user;
-    //change to findByIdAndUpdate
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(password, salt);
+
+    const user = await User.findByIdAndUpdate(
+        id,
+        {
+            password: hashed
+        }
+    );
+    return {...user, password: undefined};
+
 };
 
 // DELETE 
@@ -66,31 +73,50 @@ async function deleteUser(id){
 };
 
 // Follow
-async function follow(userid, username) {
+//userid = user that will follow another
+//username = user that will be followed
+async function follow(userid, userToFollow) {
     const user = await User.findById(userid);
     if (user.following === undefined) {
         user.following = [];
     }
-    user.following[user.following.length] = username;
+
+    //make sure the target user exists
+    if (!(await User.findOne({"username" : userToFollow}))) return false;
+
+    // make sure we don't have duplicates
+    if (user.following.includes(userToFollow)) return false;
+
+    user.following[user.following.length] = userToFollow;
     await User.findByIdAndUpdate(userid, 
         {following: user.following}
         );
     
-    return user._doc;
+    addFollower(user.username, userToFollow);
+
+
+    return true;
 }
 
 // Add follower
-async function addFollower(userid, username) {
-    const user = await User.findById(userid);
+// ONLY called from the follow function
+async function addFollower(follower, leader) {
+    const user = await User.findOne({"username": leader});
     if (user.followers === undefined){
         user.followers = [];
     }
-    user.followers[user.followers.length] = username;
-    await User.findByIdAndUpdate(userid,
+    if (user.followers.includes(follower)) return;
+    
+    user.followers[user.followers.length] = follower;
+    await User.findOneAndUpdate(
+        {
+            "username": leader
+        },
         {
             followers: user.followers
         });
-    return user._doc;
+    
+    return;
 }
 
 
@@ -104,5 +130,5 @@ async function getUser(username){
 
 // export functions that will be used in routes
 module.exports = {
-    register, login, updatePassword, deleteUser, getUserByName, follow, addFollower
+    register, login, updatePassword, deleteUser, getUserByName, follow
 };

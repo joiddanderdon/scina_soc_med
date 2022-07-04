@@ -18,9 +18,7 @@ const Form = (props) => {
         e.preventDefault();
         fetchData("/post/create", {user_id: props.userid, post_content: postContent.data}, "POST")
         .then((data) => {
-            //Not really sure at the moment whether
-            //there should be another action here. 
-            //Luxury problems I suppose :)
+            setPostContent({"data": ""});
         });
     }
 
@@ -34,7 +32,12 @@ const Form = (props) => {
             <form onSubmit={onSubmit}>
                 <div className="row">
                     <div className="col">
-                        <textarea id="post_content" className="" onChange={onChange} />
+                        <textarea 
+                        id="post_content" 
+                        className="" 
+                        onChange={onChange}
+                        defaultValue=""
+                        />
                     </div>
                     <div className="col"></div>
                 </div>
