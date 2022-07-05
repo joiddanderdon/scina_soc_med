@@ -65,3 +65,12 @@ input:placeholder-shown {
   display: block;
   width: 60%;
 }
+
+.no-bullets {
+  list-style-type:none;
+}
+
+#reglink {
+  color: white;
+  text-decoration: none;
+}

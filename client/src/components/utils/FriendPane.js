@@ -1,16 +1,19 @@
-import { Link, Outlet } from 'react-router-dom';
 import { fetchData } from './Fetching';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const FriendPane = (props) => {
     const [following, setFollowing] = useState();
     const [followers, setFollowers] = useState();
 
-    fetchData("/user/get", {username: props.username}, "POST")
-    .then((data) => {
-        setFollowing(data.following);
-        setFollowers(data.followers);
+    //oh man -- this is SOOOOOO needed.
+    // otherwise it tries to fetch on every render!! 
+    useEffect (() => {
+        fetchData("/user/get", {username: props.username}, "POST")
+        .then((data) => {
+            setFollowing(data.following);
+            setFollowers(data.followers);
+        })
     })
 
   
@@ -43,7 +46,7 @@ const FriendPane = (props) => {
                         </li>            
                 ))}
             </ul>
-            <Outlet />
+            
         </div>
     )
 }

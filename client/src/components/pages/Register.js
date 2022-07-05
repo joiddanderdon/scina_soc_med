@@ -1,32 +1,19 @@
-import { useState } from 'react';
 import { fetchData } from "../utils/Fetching.js";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../../context/userContext.js';
 
 
 
 const Register = () => {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState({
-        username: '',
-        password: '',
-        password2: ''
-    });
+    const {user, updateUser} = useContext(UserContext);
 
     const { username, password, password2 } = user;
 
     const onChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value})
-        
-        /* This is wonky.. 
-        
-        if (document.getElementById('password').value !==
-            document.getElementById('password2').value) {
-                document.getElementById("confirm_error").innerHTML = 'Passwords do not match';
-        } else {
-            document.getElementById("confirm_error").innerHTML = '';
-        }
-        */
+        updateUser(e.target.name, e.target.value)
     }
     
     const onSubmit = (e) => {
@@ -37,6 +24,11 @@ const Register = () => {
         fetchData("/user/register", user, "POST")
         .then((data) => {
             if (!data.message) {
+                //updateUser('authenticated', true);
+                // seems i can't simultaneously set both..
+                // so i'll just say that a userid entry indicates 
+                // authenticated.. i need that ID.
+                updateUser('userid', data._id);
                 navigate("/profile",{state: {user:data.username, id:data._id}});
             }
         })
@@ -58,7 +50,7 @@ const Register = () => {
                         <div className="col">
                             <input 
                                 type="text" 
-                                id="username"
+                                id="reg_username"
                                 name="username"
                                 required
                                 onChange={onChange}
@@ -74,7 +66,7 @@ const Register = () => {
                             <input 
                                 type="password" 
                                 name="password" 
-                                id="password"
+                                id="reg_password"
                                 required
                                 onChange={onChange}
                                 
@@ -89,7 +81,7 @@ const Register = () => {
                             <input 
                                 type="password" 
                                 name="password2" 
-                                id="password2"
+                                id="reg_password2"
                                 required
                                 onChange={onChange}
                                

@@ -1,29 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchData } from './Fetching';
-import React, { useState } from 'react';
+import { useContext } from 'react';
+import UserContext from '../../context/userContext';
 
-
-
-const Login = (props) => {
-    
-
+const Login = () => {
     
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    })
-    const username = user.username;
+    const {user, updateUser} = useContext(UserContext);
+    
 
     const onChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value})
+        updateUser([e.target.name], e.target.value );
     }
+
+    
+
     const onSubmit = (e) => {
         e.preventDefault();
         fetchData("/user/login", user, "POST")
         .then((data) => {
-            if (!data.message) {
-                navigate("/profile",{state: {user: data.username, id:data._id}});
+            if (!data.message) {              
+                updateUser('userid', data._id);
+                navigate("/profile");
             }
         })
         .catch((error) => {
@@ -43,7 +41,7 @@ const Login = (props) => {
                             name="username" 
                             id="username" 
                             placeholder="username"
-                            defaultValue={username}
+                            //defaultValue={username}
                             onChange={onChange}
                         />
                     </div>
@@ -59,11 +57,12 @@ const Login = (props) => {
                 </div>
                 <div className="col align-left">
                     <div className="row">
-                        <button>Login</button>
+                        <button className="responsive-width">Login</button>
                     </div>
                     <div className="row">
-                    <Link to="register"><button>Register</button></Link>
-                        
+                        <button className="responsive-width">
+                            <Link to="register" id="reglink">Register</Link>
+                        </button>
                     </div>
                 </div>
             </div>    

@@ -3,6 +3,7 @@ export async function fetchData(
     data = {},
     methodType) 
     {
+        
         const response = await fetch(`http://localhost:5000${route}`, {
             method: methodType,
             headers: { 'Content-Type': 'application/json'},
@@ -11,8 +12,7 @@ export async function fetchData(
     
     if (response.ok) {
         return await response.json();
-    } else {
-        
+    } else { 
         throw await response.json(); 
     }
 }
