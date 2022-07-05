@@ -21,8 +21,8 @@ mongoose.connect(process.env.db_url)
 
 app.use(express.json()); //to parse JSON bodies
 
-app.use(express.static(__dirname + "/public"));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public', 'index.html')));
+app.use(express.static(__dirname + "/cient/build"));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/client/build', 'index.html')));
 
 
 //CORS middleware
